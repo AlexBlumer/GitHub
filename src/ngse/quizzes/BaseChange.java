@@ -9,10 +9,7 @@ public class BaseChange {
 	private int toBase;
 	private String baseOther;
 	private String output = "";
-	private char chars[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-			, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'
-			, 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X'
-			, 'Y', 'Z'};
+	private String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	public static void main(String args[]) {
 		BaseChange baseChange = new BaseChange();
@@ -77,7 +74,7 @@ public class BaseChange {
 		
 		for (int i = top - 1; i >= 0; i--) {
 			int num = (int) (currentRemainder / Math.pow(toBase, i));
-			output = output + chars[num];				
+			output = output + chars.charAt(1);				
 			currentRemainder -= Math.pow(toBase, i) * num; 
 		}
 	}
@@ -103,11 +100,10 @@ public class BaseChange {
 	private void changeToBase10() {
 		base10 = 0;
 		boolean error = false;
-		String charsStr = new String(chars);
 		for (int i = 0; i < baseOther.length(); i++) {
 			char digit = baseOther.charAt(i);
-			if (charsStr.indexOf(digit) != -1) {
-				int index = charsStr.indexOf(digit);
+			if (chars.indexOf(digit) != -1) {
+				int index = chars.indexOf(digit);
 				if (index >= fromBase){
 					System.out.println("Illegal character.");
 					error = true;
@@ -115,8 +111,8 @@ public class BaseChange {
 				base10 += index
 						* Math.pow(fromBase, baseOther.length() - i - 1);
 			}
-			else if (charsStr.indexOf(digit - 32) != -1) {
-				int index = charsStr.indexOf(digit - 32);
+			else if (chars.indexOf(digit - 32) != -1) {
+				int index = chars.indexOf(digit - 32);
 				if (index >= fromBase){
 					System.out.println("Illegal character.");
 					error = true;
